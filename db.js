@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function connectDB(){
     try {
-        await mongoose.connect('mongodb://localhost:27017/ecommerce')
+        await mongoose.connect(process.env.MONGO_URI)
         console.log('database connected...')
     }catch(err){
         console.log(err.message)

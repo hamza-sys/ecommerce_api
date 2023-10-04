@@ -6,7 +6,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
   } catch (err) {
-    console.log("Server Error");
+    console.log(err);
     res.status(500).send("Server Error");
   }
 };
@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
   }
 
   try {
-    const user = await new User({
+    const user = new User({
       username,
       firstName,
       lastName,
@@ -74,6 +74,7 @@ const deleteUser = async (req, res) => {
 
     try {
         const deletedUser = await User.findByIdAndDelete(id)
+        console.log(deletedUser)
         if (!deletedUser) return res.status(400).send('Invalid id')
 
         return res.status(200).json({deletedUser, message: "user deleted successfully"})

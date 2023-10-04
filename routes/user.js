@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router()
 
 // import controllers
-const {getAllUsers, createUser, updateUser, deleteUser} = require('../controllers/User.js')
+const {getAllUsers, createUser, updateUser, deleteUser} = require('../controllers/user.js')
 
 router.get('/', getAllUsers)
 router.post('/', createUser)

@@ -8,7 +8,8 @@ const db = require('./db.js')
 db()
 
 // routes
-const userRoutes = require('./routes/User.js')
+const userRoutes = require('./routes/user.js')
+const productRoutes = require('./routes/product.js')
 
 //middleware
 app.use(express.json())              // parsing body
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/users', userRoutes)
+app.use('/api/products', productRoutes)
 
 const PORT = process.env.PORT;
 
