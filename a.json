@@ -1,0 +1,36 @@
+[
+    {
+        "username": "user1",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "123 Main St, Cityville, USA",
+        "phone": "123-456-7890",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "profilePicture": "url/to/profile_picture1.jpg",
+        "isAdmin": false
+    },
+    {
+        "username": "user2",
+        "firstName": "Alice",
+        "lastName": "Johnson",
+        "address": "456 Elm St, Townsville, USA",
+        "phone": "987-654-3210",
+        "email": "alice.j@example.com",
+        "password": "securepass456",
+        "profilePicture": "url/to/profile_picture2.jpg",
+        "isAdmin": true
+    },
+    {
+        "username": "user3",
+        "firstName": "Eva",
+        "lastName": "Smith",
+        "address": "789 Oak St, Villageland, USA",
+        "phone": "111-222-3333",
+        "email": "eva.smith@example.com",
+        "password": "strongpass789",
+        "profilePicture": "url/to/profile_picture3.jpg",
+        "isAdmin": false
+    }
+]
+
