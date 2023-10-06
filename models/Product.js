@@ -28,6 +28,7 @@ const ProductSchema = new mongoose.Schema({
     },
     image: {
         type: String,
+        default: 'profile_images/profile.jpeg'
     }
 })
 

@@ -1,9 +1,14 @@
-const User = require("../models/User.js");
+const {
+  getUsers,
+  createAUser,
+  updateAUser,
+  deleteAUser,
+} = require("../services/user.js");
 
 // get All Users
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await getUsers();
     res.status(200).json(users);
   } catch (err) {
     console.log(err);
@@ -29,7 +34,7 @@ const createUser = async (req, res) => {
   }
 
   try {
-    const user = new User({
+    const user = await createAUser({
       username,
       firstName,
       lastName,
@@ -48,45 +53,47 @@ const createUser = async (req, res) => {
   }
 };
 
-
 // update a user
 const updateUser = async (req, res) => {
-    const {id} = req.params;
+  const { id } = req.params;
 
-    const updatedUserData = req.body;
+  const updatedUserData = req.body;
 
-    try {
-        const updatedUser = await User.findByIdAndUpdate(id, updatedUserData, {new: true})
+  try {
+    // const updatedUser = await User.findByIdAndUpdate(id, updatedUserData, {new: true})
 
-        if (!updatedUser) return res.status(400).send('invalid id')
+    const updatedUser = await updateAUser(id, updatedUserData);
 
-        return res.status(200).json(updatedUser)
+    if (!updatedUser) return res.status(400).send("invalid id");
 
-    }catch(err){
-        console.log(err)
-        res.status(500).send('Server Error')
-    }
-}
+    return res.status(200).json(updatedUser);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
+};
 
 // delete a user
 const deleteUser = async (req, res) => {
-    const {id} = req.params;
+  const { id } = req.params;
 
-    try {
-        const deletedUser = await User.findByIdAndDelete(id)
-        console.log(deletedUser)
-        if (!deletedUser) return res.status(400).send('Invalid id')
+  try {
+    const deletedUser = await deleteAUser(id);
 
-        return res.status(200).json({deletedUser, message: "user deleted successfully"})
-    }catch(err){
-        console.log(err)
-        res.status(500).send('Server Error')
-    }
-}
+    if (!deletedUser) return res.status(400).send("Invalid id");
+
+    return res
+      .status(200)
+      .json({ deletedUser, message: "user deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
+};
 
 module.exports = {
   getAllUsers,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
 };

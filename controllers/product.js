@@ -1,9 +1,10 @@
-const Product = require('../models/Product.js')
+
+const { getProducts, createAProduct, updateAProduct, deleteAProduct } = require('../services/product.js');
 
 // get all products
 const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await getProducts()
         res.status(200).json(products);
       } catch (err) {
         console.log(err);
@@ -18,7 +19,7 @@ const createProduct = async (req, res) => {
     if (!title || !desc || !price || !quantity) return res.status(400).json({message: 'provide all details of product'})
 
     try {
-        const product = new Product({
+        const product = await createAProduct({
             title,
             desc,
             price,
@@ -47,7 +48,7 @@ const updateProduct = async (req, res) => {
     const updatedProductData = req.body;
 
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(id, updatedProductData, {new: true})
+        const updatedProduct = await updateAProduct(id, updatedProductData)
 
         if (!updatedProduct) return res.status(400).send('invalid id')
 
@@ -65,7 +66,7 @@ const deleteProduct = async (req, res) => {
     const {id} = req.params;
 
     try {
-        const deletedProduct = await Product.findByIdAndDelete(id)
+        const deletedProduct = await deleteAProduct(id)
 
         if (!deletedProduct) return res.status(400).send('Invalid id')
 
