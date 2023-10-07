@@ -11,6 +11,7 @@ db()
 const userRoutes = require('./routes/user.js')
 const productRoutes = require('./routes/product.js')
 const cartRoutes = require('./routes/cart.js')
+const orderRoutes = require('./routes/order.js')
 
 //middleware
 app.use(express.json())              // parsing body
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/cart', cartRoutes)
+app.use('/api/orders', orderRoutes)
 
 const PORT = process.env.PORT;
 

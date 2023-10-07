@@ -56,7 +56,6 @@ const createCart = async (req, res) => {
     });
 
     await cart.save();
-    console.log(cart)
     return res.status(201).json(cart);
   } catch (err) {
     console.log(err);

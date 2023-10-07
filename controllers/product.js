@@ -1,5 +1,5 @@
 
-const { getProducts, createAProduct, updateAProduct, deleteAProduct } = require('../services/product.js');
+const { getProducts, createAProduct, updateAProduct, deleteAProduct, getSingleProduct } = require('../services/product.js');
 
 // get all products
 const getAllProducts = async (req, res) => {
@@ -8,7 +8,25 @@ const getAllProducts = async (req, res) => {
         res.status(200).json(products);
       } catch (err) {
         console.log(err);
-        res.status(500).send("Server Error");
+        res.status(500).send(err);
+      }
+}
+
+// get a single product
+const getASingleProduct = async (req, res) => {
+    const {productId} = req.params;
+
+    try {
+
+        const singleProduct = await getSingleProduct(productId)
+
+        if (!singleProduct) return res.status(400).send('Product not found')
+
+        return res.status(200).json(singleProduct)
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).send(err);
       }
 }
 
@@ -36,7 +54,7 @@ const createProduct = async (req, res) => {
 
     }catch(err){
         console.log(err);
-        res.status(500).send("Server Error");
+        res.status(500).send(err);
     }
 }
 
@@ -56,7 +74,7 @@ const updateProduct = async (req, res) => {
 
     }catch(err){
         console.log(err)
-        res.status(500).send('Server Error')
+        res.status(500).send(err)
     }
 
 }
@@ -73,7 +91,7 @@ const deleteProduct = async (req, res) => {
         return res.status(200).json({deletedProduct, message: "Product deleted successfully"})
     }catch(err){
         console.log(err)
-        res.status(500).send('Server Error')
+        res.status(500).send(err)
     }
 }
 
